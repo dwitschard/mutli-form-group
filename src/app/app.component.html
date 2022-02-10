@@ -1,19 +1,23 @@
 <h1>Root Container</h1>
-<div class="border-root-container">
+<div>
   <form [formGroup]="form" (ngSubmit)="submitAllForms()">
 
     <app-user-form
       [parentFormGroup]="getChildFormGroup('userInformation')"
       [userInformation]="prefilledUserInformation"
+      [shouldDisplaySubmitButton]="true"
+      (formSubmitted)="submitAllForms()"
     >
     </app-user-form>
 
     <app-company-form
       [companyForm]="getChildFormGroup('companyInformation')"
       [companyInformation]="prefilledCompanyInformation"
+      (formSubmitted)="submitAllForms()"
     >
     </app-company-form>
 
     <button type="submit">Abschicken</button>
+
   </form>
 </div>

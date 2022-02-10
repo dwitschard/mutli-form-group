@@ -6,10 +6,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'multi-form-group';
 
   public prefilledUserInformation: UserModel = {
     firstName: 'Entered Firstname',
@@ -17,7 +16,8 @@ export class AppComponent {
   }
 
   public prefilledCompanyInformation: CompanyModel = {
-    companyName: 'Fancy Corp.'
+    companyName: 'Fancy Corp.',
+    address: 'Musterstrasse 87'
   }
 
   public form: FormGroup;
@@ -32,9 +32,16 @@ export class AppComponent {
 
   private buildForm(): FormGroup {
     return this.fb.group({
-      userInformation: this.fb.group({}),
+      userInformation: this.fb.group({
+        // Option I
+        // This Form is added during runtime in `UserFormComponent#ngOnInit`
+      }),
       companyInformation: this.fb.group({
+        // Option II
+        // Define structure (and keys) of form already in ParentComponent.
+        // Attention: Child-Component `CompanyFormComponent` needs to be aware of the keys (`name`, `address`!
         name: ['', [Validators.required]],
+        address: ['', [Validators.required]],
       }),
     })
   }

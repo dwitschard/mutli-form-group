@@ -1,8 +1,17 @@
-<div class="company-form-wrapper" *ngIf="companyForm">
-  <form [formGroup]="companyForm">
+<div class="company-form-wrapper">
+  <h3>Company Form</h3>
+  <form [formGroup]="companyForm" (ngSubmit)="submitCompanyForm()">
     <div>
       <label for="name">Name</label>
       <input id="name" type="text" formControlName="name">
     </div>
+
+    <div>
+      <label for="address">Name</label>
+      <input id="address" type="text" formControlName="address">
+    </div>
+
+    <!--    Attention: Always have a Button with type 'submit' present, otherwise this event is not captured! -->
+    <button type="submit" [class.remove]="!shouldDisplaySubmitButton">Submit | Can be hidden</button>
   </form>
 </div>

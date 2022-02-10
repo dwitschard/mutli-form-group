@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserModel} from "../../models/user.model";
 
@@ -11,6 +11,9 @@ export class UserFormComponent implements OnInit {
 
   @Input() parentFormGroup!: FormGroup;
   @Input() userInformation!: UserModel;
+  @Input() shouldDisplaySubmitButton: boolean = false;
+
+  @Output() formSubmitted: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private fb: FormBuilder) {
   }
@@ -32,4 +35,8 @@ export class UserFormComponent implements OnInit {
     })
   }
 
+  submitForm() {
+    console.log('submitted user form')
+    this.formSubmitted.emit()
+  }
 }

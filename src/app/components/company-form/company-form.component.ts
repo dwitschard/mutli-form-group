@@ -1,5 +1,5 @@
-import {Component, Input, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, AfterViewInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormGroup} from "@angular/forms";
 import {CompanyModel} from "../../models/company.model";
 
 @Component({
@@ -11,6 +11,9 @@ export class CompanyFormComponent implements OnInit {
 
   @Input() companyInformation!: CompanyModel;
   @Input() companyForm!: FormGroup;
+  @Input() shouldDisplaySubmitButton: boolean = false;
+
+  @Output() formSubmitted: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() {
   }
@@ -22,10 +25,14 @@ export class CompanyFormComponent implements OnInit {
   }
 
   private prefillForm() {
-    const {companyName} = this.companyInformation;
+    const {companyName, address} = this.companyInformation;
     this.companyForm.patchValue({
       name: companyName,
+      address: address,
     })
   }
 
+  submitCompanyForm() {
+    this.formSubmitted.emit();
+  }
 }

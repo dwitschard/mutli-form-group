@@ -1,5 +1,6 @@
 <div class="user-form-wrapper">
-  <form [formGroup]="parentFormGroup">
+  <h3>User Form</h3>
+  <form [formGroup]="parentFormGroup" (ngSubmit)="submitForm()">
     <div>
       <label for="firstname">Vorname</label>
       <input id="firstname" type="text" formControlName="first">
@@ -7,8 +8,12 @@
 
     <div>
       <label for="lastname">Nachname</label>
-      <input id="lastname" type="text" formControlName="last">
+      <input id="lastname" type="text" (submit)="formSubmitted.emit()" formControlName="last">
     </div>
+
+    <!--    Attention: Always have a Button with type 'submit' present, otherwise this event is not captured! -->
+    <button type="submit" [class.remove]="!shouldDisplaySubmitButton">Submit | Can be hidden</button>
+
   </form>
 
 </div>
