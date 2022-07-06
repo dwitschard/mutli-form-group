@@ -4,7 +4,7 @@ Dieses Repo zeigt Möglichkeiten wie grosse, komplexe Formulare in Angular aufge
 ## Optionen
 Die verschiedenen `features` zeigen je unterschiedliche Ansätze, wie man das Problem lösen kann:
  
-### Option I: Dynamische Erzeugung der Formularstruktur im Child-Component; siehe (option-1)[src/app/features/option-1]
+### Option I: Dynamische Erzeugung der Formularstruktur im Child-Component; siehe [option-1](src/app/features/option-1)
 Der Parent [dynamic-child-wrapper.component.ts](src/app/features/option-1/containers/dynamic-child-wrapper/dynamic-child-wrapper.component.ts) definiert nur, dass es eine FormGroup mit irgendeinem Namen gibt
 
 Der Child-Component [UserFormComponent](src/app/features/option-1/components/user-form/user-form.component.ts) erstellt seine «eigene» FormGroup zur Laufzeit im `ngOnInit`-Hook 
@@ -14,7 +14,7 @@ Der Child-Component hat dann die gesamte Logik zum Formular gekapselt was das Be
 
 **⛔ Nachteil**: Der Root-Component `AppComponent` welcher den Formularinhalt weiterverarbeitet, weiss nicht wie die Struktur des Formulars aussieht.
  
-### Option II: Formularstruktur vom Parent definiert; siehe (option-1)[src/app/features/option-2]
+### Option II: Formularstruktur vom Parent definiert; siehe [option-2](src/app/features/option-2)
 Der Parent [static-child-wrapper.component.ts](src/app/features/option-2/containers/static-child-wrapper/static-child-wrapper.component.ts) gibt die Struktur des Formulars für den Child-Component (company-form.component.ts)[src/app/features/option-2/components/company-form/company-form.component.ts] vor
 
 (**⛔ Nachteil**: Refactorings im Root-Component [static-child-wrapper.component.ts](src/app/features/option-2/containers/static-child-wrapper/static-child-wrapper.component.ts) lassen nicht direkt vermuten, dass dies einen Impact auf den ChildComponent (company-form.component.ts)[src/app/features/option-2/components/company-form/company-form.component.ts] haben könnte.
@@ -23,7 +23,7 @@ Der Parent [static-child-wrapper.component.ts](src/app/features/option-2/contain
 (**⛔ Nachteil**: Der Child-Component muss exakt wissen wie die Properties (`name`, `address`) heissen, damit er mit dem Formular interagieren kann (z.B Befüllen von Defaultwerten / bereits existierenden Daten)
 => Wird durch _Typed Forms_ von _Angular v14_ obsolet)
 
-### Option III: Dynamisches Formularmodul (Custom-Made); siehe (option-3)[src/app/features/option-3]
+### Option III: Dynamisches Formularmodul (Custom-Made); siehe [option-3](src/app/features/option-3)
 
 Das Formular wird mittels [Konfigurationsobjekt](src/app/features/option-3/modules/dynamic-forms/model/dynamic-reactive-form.model.ts) definiert, und dann in die [dynamic-form.component.ts](src/app/features/option-3/modules/dynamic-forms/dynamic-form/dynamic-form.component.ts) übergeben, welche das gesamte
 Rendering des Formulars übernimmt.
@@ -37,7 +37,7 @@ Bsp der Verwendung: [dynamic-form-wrapper.component.ts](src/app/features/option-
 
 **⛔ Nachteil**: Flexibilität vs. Komplexität - Können alle Usecases mit einer übschaubaren Komplexität abgedeckt werden? 
 
-### Option IV: Dynamisches Formularmodul (ext. Library); siehe (option-4)[src/app/features/option-4]
+### Option IV: Dynamisches Formularmodul (ext. Library); siehe [option-4](src/app/features/option-4)
 
 Bsp: [formly-wrapper.component.ts](src/app/features/option-4/containers/formly-wrapper/formly-wrapper.component.ts)
 Link Dokumentation: [Formly Dokumentation](https://formly.dev/)
