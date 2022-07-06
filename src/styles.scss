@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/scss/bootstrap.scss';
+
 input[type=text] {
   width: 100%;
   padding: 12px 20px;
@@ -9,3 +11,6 @@ input[type=text] {
 .remove {
   display: none;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

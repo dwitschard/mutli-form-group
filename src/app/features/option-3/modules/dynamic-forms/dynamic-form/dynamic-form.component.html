@@ -1,0 +1,12 @@
+<ng-container *ngIf="formReady">
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <ng-container *ngFor="let field of fieldset; let first = first">
+      <lip-dynamic-field
+        [field]="field"
+        [formFieldClass]="formFieldClass"
+        [shouldFocus]="focusFirstFormField && first"
+      ></lip-dynamic-field>
+    </ng-container>
+    <ng-content></ng-content>
+  </form>
+</ng-container>

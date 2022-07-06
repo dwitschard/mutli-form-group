@@ -1,0 +1,13 @@
+<app-page-title>
+  Formularstruktur vom Parent definiert (Option II)
+</app-page-title>
+
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+  <app-company-form
+    [companyForm]="getChildFormGroup('companyInformation')"
+    [companyInformation]="prefilledCompanyInformation"
+    (formSubmitted)="submitForm()"
+  >
+  </app-company-form>
+
+</form>

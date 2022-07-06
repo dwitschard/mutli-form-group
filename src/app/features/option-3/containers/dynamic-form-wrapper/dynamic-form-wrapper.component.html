@@ -1,0 +1,12 @@
+<app-page-title>
+  Dynamisches Form-Modul (Option III)
+</app-page-title>
+
+<lip-dynamic-form
+  [fieldset]="formFields"
+  [readOnly]="false"
+  formFieldClass="fill-secondary"
+  (onSubmit)="submit($event)"
+>
+  <button type="submit" [class.remove]="false">Submit | Can be hidden</button>
+</lip-dynamic-form>

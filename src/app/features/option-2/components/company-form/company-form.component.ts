@@ -11,7 +11,7 @@ export class CompanyFormComponent implements OnInit {
 
   @Input() companyInformation!: CompanyModel;
   @Input() companyForm!: FormGroup;
-  @Input() shouldDisplaySubmitButton: boolean = false;
+  @Input() shouldDisplaySubmitButton: boolean = true;
 
   @Output() formSubmitted: EventEmitter<void> = new EventEmitter<void>();
 

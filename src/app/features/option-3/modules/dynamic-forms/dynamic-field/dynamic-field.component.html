@@ -1,0 +1,134 @@
+<ng-container *ngIf="field.visible !== false && field.type != FieldType.HIDDEN" [ngSwitch]="field.type">
+  <!-- CHECKBOX -->
+  <div *ngSwitchCase="0" class="checkbox-view">
+    <mat-checkbox [formControl]="control" color="primary">
+      {{ field.name }}
+    </mat-checkbox>
+  </div>
+
+  <!-- DATEPICKER -->
+  <mat-list-item *ngSwitchCase="1">
+    <mat-form-field [ngClass]="formFieldClass">
+      <mat-label>{{ field.label }}</mat-label>
+      <input matInput [matDatepicker]="picker" [placeholder]="fieldPlaceholder" [formControl]="control" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error>
+        <lip-form-field-error [field]="control"></lip-form-field-error>
+      </mat-error>
+    </mat-form-field>
+  </mat-list-item>
+
+  <!-- SINGLE RADIO -->
+  <mat-radio-group *ngSwitchCase="2" [formControl]="control">
+    <mat-radio-button *ngFor="let option of field.options" [value]="option" color="primary">
+      {{ option }}
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <!-- SELECT DROPDOWN -->
+  <mat-list-item *ngSwitchCase="3">
+    <mat-form-field [ngClass]="formFieldClass">
+      <mat-label>{{ field.label }}</mat-label>
+      <mat-select [placeholder]="fieldPlaceholder" [formControl]="control">
+        <mat-option *ngFor="let option of field.options" [value]="option">{{
+          field.optionsDisplayFn ? field.optionsDisplayFn(option) : option
+        }}</mat-option>
+      </mat-select>
+      <mat-error>
+        <lip-form-field-error [field]="control"></lip-form-field-error>
+      </mat-error>
+    </mat-form-field>
+  </mat-list-item>
+
+  <!-- SELECT LIST -->
+  <mat-selection-list *ngSwitchCase="4" [formControl]="control" color="primary">
+    <mat-list-option *ngFor="let option of field.options" [value]="option" color="primary" checkboxPosition="before">
+      {{ option }}
+    </mat-list-option>
+  </mat-selection-list>
+
+  <!-- SLIDE TOGGLE -->
+  <ng-container *ngSwitchCase="5">
+    <!-- <mat-list-item > -->
+    <mat-slide-toggle matLine [formControl]="control" color="primary" class="checkbox-view">
+      {{ field.name }}
+    </mat-slide-toggle>
+    <!-- </mat-list-item> -->
+
+    <div matLine *ngIf="field.children" style="padding-top: 7px">
+      <ng-container *ngFor="let child of field.children">
+        <lip-dynamic-field [field]="child" class="toggleChild"></lip-dynamic-field>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <!-- TEXTAREA -->
+  <mat-list-item *ngSwitchCase="6">
+    <mat-form-field [ngClass]="formFieldClass">
+      <mat-label>{{ field.label }}</mat-label>
+      <textarea matInput type="text" [formControl]="control" [placeholder]="fieldPlaceholder"></textarea>
+    </mat-form-field>
+  </mat-list-item>
+
+  <!-- TEXTFIELD -->
+  <mat-list-item *ngSwitchCase="7">
+    <mat-form-field [ngClass]="formFieldClass">
+      <mat-label>{{ field.label }}</mat-label>
+      <input matInput [type]="field.htmlInputType || 'text'" [formControl]="control" [placeholder]="fieldPlaceholder" />
+      <span matSuffix *ngIf="field.asyncValidation" class="spinner check"></span>
+      <mat-error>
+        <lip-form-field-error [field]="control"></lip-form-field-error>
+      </mat-error>
+      <mat-hint *ngIf="field.hint">{{ field.hint }}</mat-hint>
+    </mat-form-field>
+  </mat-list-item>
+
+  <!--  Autocomplete -->
+  <mat-list-item *ngSwitchCase="10">
+    <mat-form-field [ngClass]="formFieldClass">
+      <mat-label>{{ field.label }}</mat-label>
+      <input type="text" matInput [formControl]="control" [matAutocomplete]="autocomplete" />
+
+      <mat-progress-spinner
+        *ngIf="field.autocompleteLoading$ && field.autocompleteLoading$ | async"
+        class="autocomplete-field_option__loading"
+        color="primary"
+        mode="indeterminate"
+        strokeWidth="1"
+        [diameter]="20"
+      >
+      </mat-progress-spinner>
+
+      <mat-autocomplete
+        #autocomplete="matAutocomplete"
+        [autoActiveFirstOption]="
+          field.autocompleteLoading$ && (field.autocompleteLoading$ | async)
+            ? false
+            : field.autocompleteActivateFirstOption
+        "
+        [displayWith]="field.optionsDisplayFn ? field.optionsDisplayFn : null"
+      >
+        <mat-option *ngFor="let option of field.options$ | async" [value]="option">
+          {{ field.optionsDisplayFn ? field.optionsDisplayFn(option) : option }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error>
+        <lip-form-field-error [field]="control"></lip-form-field-error>
+      </mat-error>
+      <mat-hint *ngIf="field.hint">{{ field.hint }}</mat-hint>
+    </mat-form-field>
+  </mat-list-item>
+
+  <!-- SUBHEADER -->
+  <div *ngSwitchCase="8" class="subheader">
+    {{ field.name }}
+  </div>
+
+  <!-- DIVIDER -->
+  <ng-container *ngSwitchCase="9">
+    <hr />
+  </ng-container>
+
+  <mat-list-item *ngSwitchDefault>no field found</mat-list-item>
+</ng-container>

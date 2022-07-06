@@ -1,0 +1,17 @@
+<app-page-title>
+  Dynamische Erzeugung der Formularstruktur im Child-Component (Option I)
+</app-page-title>
+
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+  <app-user-form
+    [parentFormGroup]="getChildFormGroup('userInformation')"
+    [userInformation]="prefilledUserInformation"
+    [shouldDisplaySubmitButton]="true"
+    (formSubmitted)="submitForm()"
+  >
+  </app-user-form>
+
+  <!--    Attention: Always have a Button with type 'submit' present, otherwise this event is not captured! -->
+  <button type="submit" [class.remove]="true">Submit | Can be hidden</button>
+
+</form>

@@ -1,23 +1,9 @@
-<h1>Root Container</h1>
-<div>
-  <form [formGroup]="form" (ngSubmit)="submitAllForms()">
+<div class="container-fluid">
 
-    <app-user-form
-      [parentFormGroup]="getChildFormGroup('userInformation')"
-      [userInformation]="prefilledUserInformation"
-      [shouldDisplaySubmitButton]="true"
-      (formSubmitted)="submitAllForms()"
-    >
-    </app-user-form>
+  <app-navbar></app-navbar>
 
-    <app-company-form
-      [companyForm]="getChildFormGroup('companyInformation')"
-      [companyInformation]="prefilledCompanyInformation"
-      (formSubmitted)="submitAllForms()"
-    >
-    </app-company-form>
+  <router-outlet class="container"></router-outlet>
 
-    <button type="submit">Abschicken</button>
-
-  </form>
 </div>
+
+
