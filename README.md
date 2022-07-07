@@ -35,7 +35,9 @@ Bsp der Verwendung: [dynamic-form-wrapper.component.ts](src/app/features/option-
 
 **✅ Vorteil**: Keine Library-Abhängigkeit: Code ist relativ überschaubar, Änderungen für neue Anforderungen können relativ einfach eingepflegt werden. 
 
-**⛔ Nachteil**: Flexibilität vs. Komplexität - Können alle Usecases mit einer übschaubaren Komplexität abgedeckt werden? 
+**⛔ Nachteil**: Flexibilität vs. Komplexität - Können alle Usecases mit einer übschaubaren Komplexität abgedeckt werden?
+
+**⛔ Nachteil**: Komplexere Layouts wären aufwändig abzubilden
 
 ### Option IV: Dynamisches Formularmodul (ext. Library); siehe [option-4](src/app/features/option-4)
 
@@ -50,7 +52,9 @@ Link Dokumentation: [Formly Dokumentation](https://formly.dev/)
 
 **⛔ Nachteil**: Gebunden an Release-Cylces der Library, Abhängigkeit bzgl. Wartung etc. 
 
-**⛔ Nachteil**: Library kann tendentiell mehr als man benötigt was eine steilere Lernkurve nach sich zieht 
+**⛔ Nachteil**: Library kann tendentiell mehr als man benötigt was eine steilere Lernkurve nach sich zieht
+
+**⛔ Nachteil**: Komplexere Layouts wären aufwändig abzubilden
 
 ## Form-Submit Event
 Achtung: Damit der «submit»-Event korrekt behandelt wird, muss in Angular immer der `<form (ngSubmit)=»formSubmitted()»>`-Event behandelt werden. Nur so stellt ihr sicher, dass das Formular auch mit einem «Enter» in irgendeinem Feld abgeschickt werden kann (sofern es gültig ist).
